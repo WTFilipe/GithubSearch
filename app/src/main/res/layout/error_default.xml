@@ -9,7 +9,7 @@
         android:id="@+id/error_icon"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/wifi_off"
+        android:src="@drawable/ic_wifi_off"
         app:layout_constraintBottom_toTopOf="@id/error_text"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"

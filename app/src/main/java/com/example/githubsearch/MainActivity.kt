@@ -17,11 +17,5 @@ class MainActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         binding = ActivityMainBinding.inflate(inflater)
         setContentView(binding.root)
-
-        val fragment = UsersListFragment.newInstance()
-
-        supportFragmentManager.beginTransaction()
-            .add(binding.fragmentContainer.id, fragment)
-            .commit()
     }
 }
