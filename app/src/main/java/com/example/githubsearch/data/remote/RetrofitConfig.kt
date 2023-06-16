@@ -1,6 +1,5 @@
-package com.example.githubsearch.remote
+package com.example.githubsearch.data.remote
 
-import com.example.githubsearch.GithubService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
