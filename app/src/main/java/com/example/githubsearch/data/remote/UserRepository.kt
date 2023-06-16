@@ -1,11 +1,18 @@
 package com.example.githubsearch.data.remote
 
-import dagger.Provides
+import com.example.githubsearch.ui.models.UserOnListUIModel
+import com.example.githubsearch.ui.models.UserUIModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class UserRepository constructor(
-    private val remoteDataSource: UserRemoteDataSource
-){
+class UserRepository @Inject constructor(
+    private val remoteDataSource: IUserDataSource
+): IUserRepository {
+    override suspend fun getUserList(): Flow<List<UserOnListUIModel>> = remoteDataSource.getUserList().flowOn(Dispatchers.IO)
+
+    override suspend fun getUserDetail(userName: String): Flow<UserUIModel> {
+        TODO("Not yet implemented")
+    }
 }

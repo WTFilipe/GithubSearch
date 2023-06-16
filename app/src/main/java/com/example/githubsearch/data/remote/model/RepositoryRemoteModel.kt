@@ -1,6 +1,6 @@
 package com.example.githubsearch.data.remote.model
 
-data class GithubRepository(
+data class RepositoryRemoteModel(
     val allow_forking: Boolean?,
     val archive_url: String?,
     val archived: Boolean?,
@@ -57,7 +57,7 @@ data class GithubRepository(
     val notifications_url: String?,
     val open_issues: Int?,
     val open_issues_count: Int?,
-    val owner: Owner?,
+    val ownerRemoteModel: OwnerRemoteModel?,
     val `private`: Boolean?,
     val pulls_url: String?,
     val pushed_at: String?,

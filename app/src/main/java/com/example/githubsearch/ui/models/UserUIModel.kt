@@ -1,6 +1,6 @@
 package com.example.githubsearch.ui.models
 
-data class UserUI(
+data class UserUIModel(
     val id: Int,
     val name: String
 )

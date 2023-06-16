@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubsearch.databinding.UserListItemBinding
-import com.example.githubsearch.ui.models.UserUI
+import com.example.githubsearch.ui.models.UserOnListUIModel
 
 class UserListAdapter(): RecyclerView.Adapter<UserListViewHolder>() {
 
-    private val userList = mutableListOf<UserUI>()
+    private val userList = mutableListOf<UserOnListUIModel>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListViewHolder {
         val context = parent.context
@@ -26,7 +26,7 @@ class UserListAdapter(): RecyclerView.Adapter<UserListViewHolder>() {
 
     override fun getItemCount() = userList.size
 
-    fun setUserList(userList: List<UserUI>){
+    fun setUserList(userList: List<UserOnListUIModel>){
         this.userList.addAll(userList)
         notifyDataSetChanged()
     }
