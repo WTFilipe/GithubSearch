@@ -1,6 +1,6 @@
 package com.example.githubsearch.data.remote
 
-import com.example.githubsearch.data.remote.model.RepositoryRemoteModel
+import com.example.githubsearch.data.remote.model.RepositoryOnListRemoteModel
 import com.example.githubsearch.data.remote.model.UserOnListRemoteModel
 import com.example.githubsearch.data.remote.model.UserRemoteModel
 import retrofit2.http.GET
@@ -15,5 +15,5 @@ interface GithubService {
     suspend fun getUserDetail(@Path("user") user: String): UserRemoteModel
 
     @GET("users/{user}/repos")
-    suspend fun getUserRepos(@Path("user") user: String?): List<RepositoryRemoteModel>
+    suspend fun getUserRepos(@Path("user") user: String?): List<RepositoryOnListRemoteModel>
 }

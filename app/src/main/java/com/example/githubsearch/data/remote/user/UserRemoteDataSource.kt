@@ -1,5 +1,6 @@
-package com.example.githubsearch.data.remote
+package com.example.githubsearch.data.remote.user
 
+import com.example.githubsearch.data.remote.GithubService
 import com.example.githubsearch.ui.models.UserOnListUIModel
 import com.example.githubsearch.ui.models.UserUIModel
 import kotlinx.coroutines.flow.Flow
@@ -8,7 +9,7 @@ import javax.inject.Inject
 
 class UserRemoteDataSource @Inject constructor(
     private val githubService: GithubService
-) : IUserDataSource{
+) : IUserDataSource {
     override suspend fun getUserList(): Flow<List<UserOnListUIModel>> = flow {
         val listInUIModel = githubService.getUserList().map {
             it.toUIModel()

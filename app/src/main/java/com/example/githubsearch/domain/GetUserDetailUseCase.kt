@@ -1,6 +1,6 @@
 package com.example.githubsearch.domain
 
-import com.example.githubsearch.data.remote.IUserRepository
+import com.example.githubsearch.data.remote.user.IUserRepository
 import com.example.githubsearch.ui.models.UserUIModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

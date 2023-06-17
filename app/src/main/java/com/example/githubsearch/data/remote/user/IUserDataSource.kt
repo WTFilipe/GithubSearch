@@ -1,4 +1,4 @@
-package com.example.githubsearch.data.remote
+package com.example.githubsearch.data.remote.user
 
 import com.example.githubsearch.ui.models.UserOnListUIModel
 import com.example.githubsearch.ui.models.UserUIModel
