@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface IUserDataSource {
     suspend fun getUserList() : Flow<List<UserOnListUIModel>>
-    suspend fun getUserDetail() : Flow<UserUIModel>
+    suspend fun getUserDetail(username: String) : Flow<UserUIModel>
 }

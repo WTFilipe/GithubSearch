@@ -6,7 +6,7 @@ import com.example.githubsearch.data.remote.IUserRepository
 import com.example.githubsearch.data.remote.RetrofitConfig
 import com.example.githubsearch.data.remote.UserRemoteDataSource
 import com.example.githubsearch.data.remote.UserRepository
-import com.example.githubsearch.domain.GetUserListGetUserListUseCase
+import com.example.githubsearch.domain.GetUserListUseCase
 import com.example.githubsearch.domain.IGetUserListUseCase
 import dagger.Module
 import dagger.Provides
@@ -39,7 +39,7 @@ object DIModule {
     @Provides
     @Singleton
     fun provideGetUserListUseCase(userRepository: IUserRepository) : IGetUserListUseCase{
-        return GetUserListGetUserListUseCase(userRepository)
+        return GetUserListUseCase(userRepository)
     }
 
 }

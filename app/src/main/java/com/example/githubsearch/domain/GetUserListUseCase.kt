@@ -5,7 +5,7 @@ import com.example.githubsearch.ui.models.UserOnListUIModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetUserListGetUserListUseCase @Inject constructor(
+class GetUserListUseCase @Inject constructor(
     private val userRepository: IUserRepository
 ): IGetUserListUseCase{
 

@@ -6,8 +6,11 @@ import com.example.githubsearch.ui.models.UserOnListUIModel
 
 class UserListViewHolder(private val binding: UserListItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-    fun bind(user: UserOnListUIModel){
+    fun bind(user: UserOnListUIModel, onItemClicked: (String) -> Unit){
         binding.tvName.text = user.login
+        binding.root.setOnClickListener {
+            onItemClicked(user.login)
+        }
     }
 
 }

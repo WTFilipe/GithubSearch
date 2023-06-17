@@ -12,7 +12,5 @@ class UserRepository @Inject constructor(
 ): IUserRepository {
     override suspend fun getUserList(): Flow<List<UserOnListUIModel>> = remoteDataSource.getUserList().flowOn(Dispatchers.IO)
 
-    override suspend fun getUserDetail(userName: String): Flow<UserUIModel> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getUserDetail(userName: String): Flow<UserUIModel> = remoteDataSource.getUserDetail(userName).flowOn(Dispatchers.IO)
 }

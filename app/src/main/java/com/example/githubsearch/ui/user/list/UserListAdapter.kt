@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubsearch.databinding.UserListItemBinding
 import com.example.githubsearch.ui.models.UserOnListUIModel
 
-class UserListAdapter(): RecyclerView.Adapter<UserListViewHolder>() {
+class UserListAdapter(private val onItemClicked: (String) -> Unit): RecyclerView.Adapter<UserListViewHolder>() {
 
     private val userList = mutableListOf<UserOnListUIModel>()
 
@@ -21,7 +21,7 @@ class UserListAdapter(): RecyclerView.Adapter<UserListViewHolder>() {
     override fun onBindViewHolder(holder: UserListViewHolder, position: Int) {
         val user = userList[position]
 
-        holder.bind(user)
+        holder.bind(user, onItemClicked)
     }
 
     override fun getItemCount() = userList.size

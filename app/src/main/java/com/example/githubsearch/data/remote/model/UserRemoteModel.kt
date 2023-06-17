@@ -1,12 +1,14 @@
 package com.example.githubsearch.data.remote.model
 
+import com.example.githubsearch.ui.models.UserUIModel
+
 data class UserRemoteModel(
     val avatar_url: String?,
     val bio: String?,
     val blog: String?,
-    val company: Any?,
+    val company: String?,
     val created_at: String?,
-    val email: Any?,
+    val email: String?,
     val events_url: String?,
     val followers: Int?,
     val followers_url: String?,
@@ -14,10 +16,10 @@ data class UserRemoteModel(
     val following_url: String?,
     val gists_url: String?,
     val gravatar_id: String?,
-    val hireable: Any?,
+    val hireable: Boolean?,
     val html_url: String?,
     val id: Int,
-    val location: Any?,
+    val location: String?,
     val login: String?,
     val name: String?,
     val node_id: String?,
@@ -29,8 +31,45 @@ data class UserRemoteModel(
     val site_admin: Boolean?,
     val starred_url: String?,
     val subscriptions_url: String?,
-    val twitter_username: Any?,
+    val twitter_username: String?,
     val type: String?,
     val updated_at: String?,
     val url: String?
-)
+) {
+    fun toUIModel(): UserUIModel{
+        return UserUIModel(
+             avatar_url ?: "",
+             bio ?: "",
+             blog ?: "",
+             company ?: "",
+             created_at ?: "",
+             email ?: "",
+             events_url ?: "",
+             followers ?: -1,
+             followers_url ?: "",
+             following ?: -1,
+             following_url ?: "",
+             gists_url ?: "",
+             gravatar_id ?: "",
+             hireable ?: false,
+             html_url ?: "",
+             id,
+             location ?: "",
+             login ?: "",
+             name ?: "",
+             node_id ?: "",
+             organizations_url ?: "",
+             public_gists ?: -1,
+             public_repos ?: -1,
+             received_events_url ?: "",
+             repos_url ?: "",
+             site_admin ?: false,
+             starred_url ?: "",
+             subscriptions_url ?: "",
+             twitter_username ?: "",
+             type ?: "",
+             updated_at ?: "",
+             url ?: ""
+         )
+    }
+}

@@ -16,8 +16,9 @@ class UserRemoteDataSource @Inject constructor(
         emit(listInUIModel)
     }
 
-    override suspend fun getUserDetail(): Flow<UserUIModel> {
-        TODO("Not yet implemented")
+    override suspend fun getUserDetail(username: String): Flow<UserUIModel> = flow {
+        val userInUIModel = githubService.getUserDetail(username).toUIModel()
+        emit(userInUIModel)
     }
 
 }

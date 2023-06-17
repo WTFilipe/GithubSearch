@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.githubsearch.BaseFragment
+import com.example.githubsearch.R
 import com.example.githubsearch.databinding.FragmentUsersListBinding
 import com.example.githubsearch.domain.UserViewModel
 import com.example.githubsearch.hide
 import com.example.githubsearch.show
 import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserOnListUIModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.example.githubsearch.ui.user.detail.UserDetailFragment
 
-@AndroidEntryPoint
 class UsersListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUsersListBinding
@@ -69,17 +71,19 @@ class UsersListFragment : BaseFragment() {
     }
 
     private fun setupUserRecyclerView() {
-        userListAdapter = UserListAdapter()
+        userListAdapter = UserListAdapter{username ->
+            onUserListItemClicked(username)
+        }
         val layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
 
         binding.usersList.layoutManager = layoutManager
         binding.usersList.adapter = userListAdapter
     }
 
-    companion object {
-        fun newInstance(): UsersListFragment {
-            return UsersListFragment()
-        }
+    private fun onUserListItemClicked(username: String) {
+        val bundle = bundleOf(UserDetailFragment.USERNAME to username)
+        view?.findNavController()?.navigate(R.id.action_usersListFragment_to_userDetailFragment, bundle)
     }
+
 
 }
