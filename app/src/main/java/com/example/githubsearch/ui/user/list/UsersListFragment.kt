@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.githubsearch.BaseFragment
 import com.example.githubsearch.R
@@ -14,6 +16,7 @@ import com.example.githubsearch.databinding.FragmentUsersListBinding
 import com.example.githubsearch.domain.UserViewModel
 import com.example.githubsearch.hide
 import com.example.githubsearch.show
+import com.example.githubsearch.ui.GridLayoutItemDecoration
 import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserOnListUIModel
 import com.example.githubsearch.ui.user.detail.UserDetailFragment
@@ -38,12 +41,12 @@ class UsersListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
-        userViewModel.loadUserList()
+        if (savedInstanceState == null) userViewModel.loadUserList()
     }
 
     private fun setupObservers() {
-        userViewModel.usersList.observe(viewLifecycleOwner){
-            when(it){
+        userViewModel.usersList.observe(viewLifecycleOwner) {
+            when (it) {
                 is UIState.Loading -> onLoading()
                 is UIState.Error -> onError()
                 is UIState.Success -> onSuccess(it.data)
@@ -71,18 +74,30 @@ class UsersListFragment : BaseFragment() {
     }
 
     private fun setupUserRecyclerView() {
-        userListAdapter = UserListAdapter{username ->
-            onUserListItemClicked(username)
+        userListAdapter = UserListAdapter { username, photoURL, imageView ->
+            onUserListItemClicked(username, photoURL, imageView)
         }
         val layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+        val itemDecoration = GridLayoutItemDecoration(
+            16,
+            16,
+            16,
+            16,
+        )
 
         binding.usersList.layoutManager = layoutManager
         binding.usersList.adapter = userListAdapter
+        binding.usersList.addItemDecoration(itemDecoration)
+
     }
 
-    private fun onUserListItemClicked(username: String) {
-        val bundle = bundleOf(UserDetailFragment.USERNAME to username)
-        view?.findNavController()?.navigate(R.id.action_usersListFragment_to_userDetailFragment, bundle)
+    private fun onUserListItemClicked(username: String, photoURL: String, imageView: ImageView) {
+        val bundle = bundleOf(
+            UserDetailFragment.USERNAME to username,
+            UserDetailFragment.PHOTO_URL to photoURL
+        )
+        val extras = FragmentNavigatorExtras(imageView to UserDetailFragment.USER_PHOTO_IMAGE_VIEW)
+        view?.findNavController()?.navigate(R.id.action_usersListFragment_to_userDetailFragment, bundle, null, extras)
     }
 
 

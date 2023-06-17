@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Github Search</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder_no_description">Nenhuma descrição encontrada</string>
+    <string name="label_users">Usuários</string>
+    <string name="label_public_repos">Repositórios públicos</string>
+    <string name="label_following">Seguindo</string>
+    <string name="label_followers">Seguidores</string>
 </resources>

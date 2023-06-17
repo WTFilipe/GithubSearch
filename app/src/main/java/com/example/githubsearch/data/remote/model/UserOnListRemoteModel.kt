@@ -25,23 +25,9 @@ data class UserOnListRemoteModel(
     fun toUIModel() : UserOnListUIModel{
         return UserOnListUIModel(
             avatar_url ?: "",
-            events_url ?: "",
-            followers_url ?: "",
-            following_url,
-            gists_url ?: "",
-            gravatar_id ?: "",
-            html_url ?: "",
             id,
             login ?: "",
-            node_id ?: "",
-            organizations_url ?: "",
-            received_events_url ?: "",
-            repos_url ?: "",
-            site_admin ?: false,
-            starred_url ?: "",
-            subscriptions_url ?: "",
             type ?: "",
-            url ?: ""
         )
     }
 }

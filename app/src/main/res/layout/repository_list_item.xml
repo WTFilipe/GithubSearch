@@ -5,7 +5,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/material_card"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -15,46 +15,68 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_repo_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_16dp"
-                android:layout_marginTop="@dimen/spacing_16dp"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <TextView
                 android:id="@+id/tv_repo_name"
-                android:layout_width="wrap_content"
+                style="@style/TextAppearance.Material3.DisplaySmall"
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.9"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
-                android:layout_marginBottom="@dimen/spacing_16dp"
-                android:textSize="@dimen/text_size_24_sp"
-                app:layout_constraintBottom_toBottomOf="@id/iv_repo_img"
+                android:layout_marginTop="@dimen/spacing_16dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:lines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
-                app:layout_constraintStart_toEndOf="@id/iv_repo_img"
-                app:layout_constraintTop_toTopOf="@id/iv_repo_img"
-                app:layout_constraintVertical_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="Nome do Repositório" />
 
             <TextView
                 android:id="@+id/tv_repo_desc"
-                android:layout_width="wrap_content"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
-                android:layout_marginBottom="@dimen/spacing_16dp"
-                android:textSize="@dimen/text_size_24_sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/spacing_8dp"
+                android:lines="2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_repo_img"
-                app:layout_constraintHorizontal_bias="0"
-                android:layout_marginVertical="@dimen/spacing_8dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_repo_name"
                 tools:text="Desc do Repositório" />
+
+            <TextView
+                android:id="@+id/tv_stars"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="1000"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_8dp"
+                android:layout_marginBottom="@dimen/spacing_16dp"
+                app:drawableStartCompat="@drawable/ic_star"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_repo_desc"
+                app:drawableTint="@color/material_on_surface_emphasis_medium" />
+
+            <TextView
+                android:id="@+id/tv_watchers"
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="1000"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_8dp"
+                android:layout_marginBottom="@dimen/spacing_16dp"
+                app:drawableStartCompat="@drawable/ic_watcher"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_stars"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintTop_toBottomOf="@id/tv_repo_desc" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
