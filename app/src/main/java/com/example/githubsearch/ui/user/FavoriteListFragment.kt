@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.example.githubsearch.R
 import com.example.githubsearch.hide
+import com.example.githubsearch.show
 import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserOnListUIModel
 import com.example.githubsearch.ui.user.detail.UserDetailFragment
@@ -39,7 +40,9 @@ class FavoriteListFragment() : UsersListFragment() {
 
     override fun onSuccess(data: List<UserOnListUIModel>) {
         if (data.isEmpty()){
-            Toast.makeText(context, "Ainda não tem nada", Toast.LENGTH_SHORT).show()
+            binding.emptyLayout.errorText.text = getString(R.string.feedback_empty_response_favorite)
+            binding.emptyLayout.root.show()
+            binding.usersList.hide()
         }
 
         binding.errorLayout.root.hide()

@@ -16,4 +16,6 @@
 
     <string name="feedback_no_internet_connection">Ops, parece que você está sem conexão com a internet. Ative o Wifi ou os dados móveis e toque para tentar novamente.</string>
     <string name="feedback_generic_error">Ops, não foi possível conectar. Verifique sua conexão com a internet ou tente novamente mais tarde.</string>
+    <string name="feedback_empty_response_favorite">Parece que você anda não favoritou um perfil. Quando você favoritar, ele ficará salvo aqui.</string>
+    <string name="feedback_empty_response_generic">Ops, parece que não há informações para serem exibidas aqui</string>
 </resources>
