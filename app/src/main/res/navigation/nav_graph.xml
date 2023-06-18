@@ -21,7 +21,11 @@
         android:id="@+id/userDetailFragment"
         android:name="com.example.githubsearch.ui.user.detail.UserDetailFragment"
         android:label="UserDetailFragment"
-        tools:layout="@layout/fragment_user_detail"/>
+        tools:layout="@layout/fragment_user_detail">
+        <action
+            android:id="@+id/action_userDetailFragment_to_repositoryListFragment"
+            app:destination="@id/repositoryListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteListFragment"
         android:name="com.example.githubsearch.ui.user.FavoriteListFragment"
@@ -66,7 +70,16 @@
         android:id="@+id/personalDetailFragment"
         tools:layout="@layout/fragment_user_detail"
         android:name="com.example.githubsearch.ui.personal.PersonalDetailFragment"
-        android:label="PersonalDetailFragment" />
+        android:label="PersonalDetailFragment" >
+        <action
+            android:id="@+id/action_personalDetailFragment_to_repositoryListFragment"
+            app:destination="@id/repositoryListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/repositoryListFragment"
+        tools:layout="@layout/fragment_repository_list"
+        android:name="com.example.githubsearch.ui.repository.list.RepositoryListFragment"
+        android:label="RepositoryListFragment" />
 
 
 </navigation>

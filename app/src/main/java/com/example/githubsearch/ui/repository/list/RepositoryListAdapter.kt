@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.githubsearch.databinding.RepositoryListItemBinding
 import com.example.githubsearch.ui.models.RepositoryOnListUIModel
 
-class RepositoryListAdapter(private val maxItemsQuantity: Int? = null, private val onItemClicked: (String) -> Unit) : RecyclerView.Adapter<RepositoryListViewHolder>(){
+class RepositoryListAdapter(private val onItemClicked: (String) -> Unit) : RecyclerView.Adapter<RepositoryListViewHolder>(){
 
     private val repositoryList = mutableListOf<RepositoryOnListUIModel>()
 
@@ -15,14 +15,13 @@ class RepositoryListAdapter(private val maxItemsQuantity: Int? = null, private v
         val inflater = LayoutInflater.from(context)
         val binding = RepositoryListItemBinding.inflate(inflater)
 
+        val lp = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        binding.root.layoutParams = lp
+
         return RepositoryListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = if (maxItemsQuantity == null || (maxItemsQuantity != null && maxItemsQuantity > repositoryList.size)){
-        repositoryList.size
-    } else {
-        maxItemsQuantity
-    }
+    override fun getItemCount() = repositoryList.size
 
     override fun onBindViewHolder(holder: RepositoryListViewHolder, position: Int) {
         val repository = repositoryList[position]
@@ -33,4 +32,5 @@ class RepositoryListAdapter(private val maxItemsQuantity: Int? = null, private v
         this.repositoryList.addAll(list)
         notifyDataSetChanged()
     }
+
 }

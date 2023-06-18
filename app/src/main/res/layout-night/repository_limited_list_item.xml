@@ -5,8 +5,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/material_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout"
@@ -16,7 +18,7 @@
             <TextView
                 android:id="@+id/tv_repo_name"
                 style="@style/TextAppearance.Material3.DisplaySmall"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
                 android:layout_marginTop="@dimen/spacing_16dp"
@@ -27,12 +29,13 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.9"
                 tools:text="Nome do Repositório" />
 
             <TextView
                 android:id="@+id/tv_repo_desc"
                 style="@style/TextAppearance.Material3.TitleSmall"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
                 android:layout_marginTop="@dimen/spacing_8dp"
@@ -47,34 +50,35 @@
                 style="@style/TextAppearance.Material3.TitleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1000"
-                android:gravity="center"
                 android:layout_marginStart="@dimen/spacing_16dp"
                 android:layout_marginTop="@dimen/spacing_8dp"
                 android:layout_marginBottom="@dimen/spacing_16dp"
+                android:drawableTint="@color/black"
+                android:gravity="center"
                 app:drawableStartCompat="@drawable/ic_star"
+                app:drawableTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_repo_desc"
-                app:drawableTint="@color/black" />
+                tools:text="1000" />
 
             <TextView
                 android:id="@+id/tv_watchers"
                 style="@style/TextAppearance.Material3.TitleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="1000"
-                android:gravity="center"
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
                 android:layout_marginTop="@dimen/spacing_8dp"
                 android:layout_marginBottom="@dimen/spacing_16dp"
+                android:gravity="center"
                 app:drawableStartCompat="@drawable/ic_watcher"
+                app:drawableTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_stars"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@id/tv_stars"
                 app:layout_constraintTop_toBottomOf="@id/tv_repo_desc"
-                app:drawableTint="@color/black" />
+                tools:text="1000" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

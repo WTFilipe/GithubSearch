@@ -324,6 +324,22 @@
                 app:layout_constraintVertical_bias="1"
                 tools:text="email@email.com" />
 
+            <TextView
+                android:id="@+id/tv_see_all"
+                style="@style/TextAppearance.Material3.BodySmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_8dp"
+                android:layout_marginEnd="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_8dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:lines="1"
+                android:text="@string/label_see_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_label_email"
+                app:layout_constraintVertical_bias="1"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_user_repositories"
@@ -333,7 +349,7 @@
                 android:layout_marginBottom="@dimen/spacing_16dp"
                 app:layout_constraintVertical_bias="0"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_email" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_see_all" />
 
             <include
                 android:id="@+id/loading_layout"
@@ -347,7 +363,9 @@
             <include
                 android:id="@+id/error_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 layout="@layout/error_default"
                 android:visibility="gone" />
 

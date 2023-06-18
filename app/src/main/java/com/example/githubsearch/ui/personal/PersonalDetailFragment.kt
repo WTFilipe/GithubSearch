@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.system.Os.remove
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.githubsearch.R
 import com.example.githubsearch.getTintedDrawable
@@ -12,6 +13,7 @@ import com.example.githubsearch.hide
 import com.example.githubsearch.show
 import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserUIModel
+import com.example.githubsearch.ui.repository.list.RepositoryListFragment
 import com.example.githubsearch.ui.user.detail.UserDetailFragment
 
 class PersonalDetailFragment : UserDetailFragment() {
@@ -54,7 +56,7 @@ class PersonalDetailFragment : UserDetailFragment() {
         repositoriesViewModel.repositoriesList.observe(viewLifecycleOwner){
             when(it){
                 is UIState.Error -> onReposError()
-                is UIState.Loading -> onReposLoading()
+                is UIState.Loading -> {}
                 is UIState.Success -> onReposSuccess(it.data)
             }
         }
@@ -73,6 +75,13 @@ class PersonalDetailFragment : UserDetailFragment() {
     override fun onError(cause: Throwable?) {
         Toast.makeText(context, getString(R.string.feedback_no_user_found), Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
+    }
+
+    override fun goToRepositoryList() {
+        val bundle = bundleOf(
+            RepositoryListFragment.USERNAME to username,
+        )
+        findNavController().navigate(R.id.action_personalDetailFragment_to_repositoryListFragment, bundle)
     }
 
 

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearch.BaseFragment
 import com.example.githubsearch.R
@@ -21,7 +23,7 @@ import com.example.githubsearch.ui.SpaceStartAndEndItemDecoration
 import com.example.githubsearch.ui.models.RepositoryOnListUIModel
 import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserUIModel
-import com.example.githubsearch.ui.repository.list.RepositoryListAdapter
+import com.example.githubsearch.ui.repository.list.RepositoryListFragment
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
@@ -29,7 +31,7 @@ open class UserDetailFragment : BaseFragment() {
 
     protected lateinit var binding: FragmentUserDetailBinding
     protected lateinit var username: String
-    protected lateinit var repositoryAdapter: RepositoryListAdapter
+    private lateinit var repositoryAdapter: RepositoryLimitedListAdapter
     protected val userViewModel: UserViewModel by viewModels()
     protected val repositoriesViewModel: RepositoryViewModel by viewModels()
     private var isUserFavorited = false
@@ -45,7 +47,7 @@ open class UserDetailFragment : BaseFragment() {
     }
 
     private fun setupRepositoryRecyclerView() {
-        repositoryAdapter = RepositoryListAdapter(REPOSITORY_QUANTITY_IN_LIST){repositoryURL ->
+        repositoryAdapter = RepositoryLimitedListAdapter(REPOSITORY_QUANTITY_IN_LIST){ repositoryURL ->
             context?.let { repositoryURL.openUrlInBrowser(it) }
         }
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -79,7 +81,7 @@ open class UserDetailFragment : BaseFragment() {
         repositoriesViewModel.repositoriesList.observe(viewLifecycleOwner){
             when(it){
                 is UIState.Error -> onReposError()
-                is UIState.Loading -> onReposLoading()
+                is UIState.Loading -> {}
                 is UIState.Success -> onReposSuccess(it.data)
             }
         }
@@ -145,11 +147,9 @@ open class UserDetailFragment : BaseFragment() {
         repositoryAdapter.setRepositoryList(data)
     }
 
-    protected fun onReposLoading() {
-    }
-
     protected fun onReposError() {
-
+        binding.tvSeeAll.hide()
+        binding.rvUserRepositories.hide()
     }
 
     open fun onSuccess(data: UserUIModel) {
@@ -198,6 +198,17 @@ open class UserDetailFragment : BaseFragment() {
                 userViewModel.addFavoriteUser(data)
             }
         }
+
+        binding.tvSeeAll.setOnClickListener {
+            goToRepositoryList()
+        }
+    }
+
+    open fun goToRepositoryList() {
+        val bundle = bundleOf(
+            RepositoryListFragment.USERNAME to username,
+        )
+        findNavController().navigate(R.id.action_userDetailFragment_to_repositoryListFragment, bundle)
     }
 
     protected fun onLoading() {

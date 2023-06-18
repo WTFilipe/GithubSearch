@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.repository.list.RepositoryListFragment">
+
+        <TextView
+            android:id="@+id/repository_list_title"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_margin="@dimen/spacing_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Repositórios do Filipe" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/repository_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/spacing_16dp" />
+
+        <include
+            android:id="@+id/loading_layout"
+            layout="@layout/loading_default"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/error_layout"
+            layout="@layout/error_default"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/empty_layout"
+            layout="@layout/empty_default"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</layout>
