@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class UserRemoteDataSource @Inject constructor(
     private val githubService: GithubService
-) : IUserDataSource {
+) : IUserRemoteDataSource {
     override suspend fun getUserList(): Flow<List<UserOnListUIModel>> = flow {
         val listInUIModel = githubService.getUserList().map {
             it.toUIModel()

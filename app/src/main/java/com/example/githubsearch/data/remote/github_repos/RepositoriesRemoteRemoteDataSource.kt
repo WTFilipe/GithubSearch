@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RepositoriesRemoteDataSource @Inject constructor(
+class RepositoriesRemoteRemoteDataSource @Inject constructor(
     private val githubService: GithubService
-) : IRepositoryDataSource {
+) : IRepositoryRemoteDataSource {
 
     override suspend fun getUserRepositoriesList(username: String): Flow<List<RepositoryOnListUIModel>> = flow {
         val listInUIModel = githubService.getUserRepos(username).map { it.toUIModel() }

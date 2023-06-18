@@ -5,9 +5,9 @@ import com.example.githubsearch.ui.models.UserOnListUIModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetUserListUseCase @Inject constructor(
+class GetFavoriteUsersListUseCase @Inject constructor(
     private val userRepository: IUserRepository
-): IGetUserListUseCase{
+): IGetFavoriteUsersListUseCase{
 
-    override suspend fun execute(): Flow<List<UserOnListUIModel>> = userRepository.getUserList()
+    override suspend fun execute(): Flow<List<UserOnListUIModel>> = userRepository.getFavoriteUsers()
 }
