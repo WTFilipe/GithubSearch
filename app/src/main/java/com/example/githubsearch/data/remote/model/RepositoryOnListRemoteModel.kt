@@ -86,7 +86,7 @@ data class RepositoryOnListRemoteModel(
             description ?: "",
             stargazers_count ?: 0,
             watchers_count ?: 0,
-            url ?: ""
+            html_url ?: ""
         )
     }
 }

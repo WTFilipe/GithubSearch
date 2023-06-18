@@ -2,8 +2,14 @@
     <string name="app_name">Github Search</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="placeholder_no_description">Nenhuma descrição encontrada</string>
+    <string name="placeholder_not_found">Não encontrado</string>
     <string name="label_users">Usuários</string>
     <string name="label_public_repos">Repositórios públicos</string>
     <string name="label_following">Seguindo</string>
     <string name="label_followers">Seguidores</string>
+    <string name="label_company">Empresa: </string>
+    <string name="label_blog">Blog: </string>
+    <string name="label_twitter">Twitter: </string>
+    <string name="label_email">Email: </string>
+    <string name="label_location">Localização: </string>
 </resources>

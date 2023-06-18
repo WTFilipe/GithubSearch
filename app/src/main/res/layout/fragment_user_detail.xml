@@ -56,24 +56,12 @@
             tools:text="Filipe Oliveira" />
 
         <TextView
-            android:id="@+id/tv_bio"
-            style="@style/TextAppearance.Material3.BodyLarge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_16dp"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_followers"
-            tools:text="Filipe" />
-
-        <TextView
             android:id="@+id/tv_label_followers"
             style="@style/TextAppearance.Material3.TitleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_16dp"
-            android:layout_marginVertical="8dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/label_followers"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
@@ -97,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_16dp"
-            android:layout_marginVertical="8dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/label_following"
             app:layout_constraintStart_toEndOf="@id/tv_label_followers"
             app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
@@ -121,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_16dp"
-            android:layout_marginVertical="8dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
             android:text="@string/label_public_repos"
             app:layout_constraintStart_toEndOf="@id/tv_label_following"
             app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
@@ -139,13 +127,170 @@
             app:layout_constraintTop_toBottomOf="@id/tv_label_public_repos"
             tools:text="8" />
 
+        <TextView
+            android:id="@+id/tv_bio"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16dp"
+            android:layout_marginVertical="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_followers"
+            app:layout_goneMarginBottom="@dimen/spacing_0dp"
+            app:layout_goneMarginTop="@dimen/spacing_0dp"
+            tools:text="Filipe" />
+
+        <TextView
+            android:id="@+id/tv_label_location"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:text="@string/label_location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_bio" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8dp"
+            android:layout_marginEnd="@dimen/spacing_16dp"
+            android:gravity="start"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/label_company"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_label_location"
+            app:layout_constraintStart_toEndOf="@id/tv_label_location"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_location"
+            tools:text="Rio de Janeiro" />
+
+        <TextView
+            android:id="@+id/tv_label_company"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:text="@string/label_company"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_location" />
+
+        <TextView
+            android:id="@+id/tv_company"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8dp"
+            android:layout_marginEnd="@dimen/spacing_16dp"
+            android:gravity="start"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/label_company"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_label_company"
+            app:layout_constraintStart_toEndOf="@id/tv_label_company"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_company"
+            tools:text="Verity" />
+
+        <TextView
+            android:id="@+id/tv_label_blog"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:text="@string/label_blog"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_company" />
+
+        <TextView
+            android:id="@+id/tv_blog"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8dp"
+            android:layout_marginEnd="@dimen/spacing_16dp"
+            android:gravity="start"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="@string/label_company"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_label_blog"
+            app:layout_constraintStart_toEndOf="@id/tv_label_blog"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_blog"
+            tools:text="URL do Blog" />
+
+        <TextView
+            android:id="@+id/tv_label_twitter"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:text="@string/label_twitter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_blog" />
+
+        <TextView
+            android:id="@+id/tv_twitter"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8dp"
+            android:layout_marginEnd="@dimen/spacing_16dp"
+            android:gravity="start"
+            android:ellipsize="end"
+            android:lines="1"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_label_twitter"
+            app:layout_constraintStart_toEndOf="@id/tv_label_twitter"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_twitter"
+            tools:text="Username" />
+
+        <TextView
+            android:id="@+id/tv_label_email"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_16dp"
+            android:layout_marginTop="@dimen/spacing_16dp"
+            android:text="@string/label_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_twitter" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            style="@style/TextAppearance.Material3.BodyMedium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_8dp"
+            android:layout_marginEnd="@dimen/spacing_16dp"
+            android:gravity="start"
+            android:ellipsize="end"
+            android:lines="1"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_label_email"
+            app:layout_constraintStart_toEndOf="@id/tv_label_email"
+            app:layout_constraintTop_toTopOf="@+id/tv_label_email"
+            tools:text="email@email.com" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_user_repositories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_bio" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_label_email" />
 
         <include
             android:id="@+id/loading_layout"

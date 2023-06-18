@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.example.githubsearch.BaseFragment
+import com.example.githubsearch.R
 import com.example.githubsearch.databinding.FragmentUserDetailBinding
 import com.example.githubsearch.domain.RepositoryViewModel
 import com.example.githubsearch.domain.UserViewModel
 import com.example.githubsearch.hide
 import com.example.githubsearch.loadCircleImage
+import com.example.githubsearch.openUrlInBrowser
+import com.example.githubsearch.sendEmailToThisAddress
 import com.example.githubsearch.show
 import com.example.githubsearch.ui.SpaceStartAndEndItemDecoration
 import com.example.githubsearch.ui.models.RepositoryOnListUIModel
@@ -46,7 +48,7 @@ class UserDetailFragment : BaseFragment() {
 
     private fun setupRepositoryRecyclerView() {
         repositoryAdapter = RepositoryListAdapter(REPOSITORY_QUANTITY_IN_LIST){repositoryURL ->
-            Toast.makeText(context, repositoryURL, Toast.LENGTH_SHORT).show()
+            context?.let { repositoryURL.openUrlInBrowser(it) }
         }
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         val spacerItemDecoration = SpaceStartAndEndItemDecoration(16, 16)
@@ -106,6 +108,32 @@ class UserDetailFragment : BaseFragment() {
         binding.tvFollowers.text = if (data.followers >= 0) data.followers.toString() else "0"
         binding.tvFollowing.text = if (data.following >= 0) data.followers.toString() else "0"
         binding.tvLabelPublicRepos.text = if (data.public_repos >= 0) data.followers.toString() else "0"
+        binding.tvCompany.text = data.company.ifBlank { getString(R.string.placeholder_not_found) }
+        binding.tvLocation.text = data.location.ifBlank { getString(R.string.placeholder_not_found) }
+        binding.tvBlog.text = data.blog.ifBlank { getString(R.string.placeholder_not_found) }
+        binding.tvBlog.setOnClickListener {
+            data.blog.takeIf { it.isNotBlank() }?.let {
+                context?.let { url -> it.openUrlInBrowser(url) }
+            }
+        }
+        val twitterLink = if (data.twitter_username.isNotBlank()){
+            "https://www.twitter.com/${data.twitter_username}"
+        } else {
+            getString(R.string.placeholder_not_found)
+        }
+        binding.tvTwitter.text = twitterLink
+        binding.tvTwitter.setOnClickListener {
+            if (data.twitter_username.isNotBlank()){
+                context?.let { context -> twitterLink.openUrlInBrowser(context) }
+            }
+        }
+        binding.tvEmail.text = data.email.ifBlank { getString(R.string.placeholder_not_found) }
+        binding.tvEmail.setOnClickListener {
+            if (data.email.isNotBlank()){
+                context?.let { context -> data.email.sendEmailToThisAddress(context) }
+            }
+        }
+
         binding.loadingLayout.hide()
         binding.errorLayout.hide()
     }
