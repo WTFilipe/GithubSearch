@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
                     findNavController(binding.navHostFragment.id).navigate(R.id.go_to_favoriteUsersListFragment)
                     true
                 }
+                R.id.item_me ->{
+                    findNavController(binding.navHostFragment.id).navigate(R.id.go_to_personalInfo)
+                    true
+                }
                 else -> {
                     false
                 }

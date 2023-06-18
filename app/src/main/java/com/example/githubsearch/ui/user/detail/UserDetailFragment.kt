@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.TransitionInflater
 import com.example.githubsearch.BaseFragment
 import com.example.githubsearch.R
 import com.example.githubsearch.databinding.FragmentUserDetailBinding
@@ -26,19 +25,15 @@ import com.example.githubsearch.ui.repository.list.RepositoryListAdapter
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
-class UserDetailFragment : BaseFragment() {
+open class UserDetailFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentUserDetailBinding
-    private lateinit var username: String
-    private lateinit var repositoryAdapter: RepositoryListAdapter
-    private val userViewModel: UserViewModel by viewModels()
-    private val repositoriesViewModel: RepositoryViewModel by viewModels()
+    protected lateinit var binding: FragmentUserDetailBinding
+    protected lateinit var username: String
+    protected lateinit var repositoryAdapter: RepositoryListAdapter
+    protected val userViewModel: UserViewModel by viewModels()
+    protected val repositoriesViewModel: RepositoryViewModel by viewModels()
     private var isUserFavorited = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementEnterTransition = context?.let { TransitionInflater.from(it).inflateTransition(android.R.transition.move) }
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,7 +67,7 @@ class UserDetailFragment : BaseFragment() {
         } ?: onError()
     }
 
-    private fun setupObservers() {
+    open fun setupObservers() {
         userViewModel.user.observe(viewLifecycleOwner){
             when(it){
                 is UIState.Error -> onError(it.cause)
@@ -146,18 +141,18 @@ class UserDetailFragment : BaseFragment() {
             }
         }
     }
-    private fun onReposSuccess(data: List<RepositoryOnListUIModel>) {
+    protected fun onReposSuccess(data: List<RepositoryOnListUIModel>) {
         repositoryAdapter.setRepositoryList(data)
     }
 
-    private fun onReposLoading() {
+    protected fun onReposLoading() {
     }
 
-    private fun onReposError() {
+    protected fun onReposError() {
 
     }
 
-    private fun onSuccess(data: UserUIModel) {
+    open fun onSuccess(data: UserUIModel) {
         userViewModel.loadIsUserFavorited(data.id)
 
         binding.tvName.text = data.name
@@ -205,12 +200,12 @@ class UserDetailFragment : BaseFragment() {
         }
     }
 
-    private fun onLoading() {
+    protected fun onLoading() {
         binding.loadingLayout.show()
         binding.errorLayout.root.hide()
     }
 
-    private fun onError(cause: Throwable? = null) {
+    open fun onError(cause: Throwable? = null) {
         binding.loadingLayout.hide()
         binding.errorLayout.root.show()
 

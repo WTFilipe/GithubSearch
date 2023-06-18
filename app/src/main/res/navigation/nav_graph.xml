@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/usersListFragment"
         android:name="com.example.githubsearch.ui.user.list.UsersListFragment"
-        tools:layout="@layout/fragment_users_list"
-        android:label="UsersListFragment" >
+        android:label="UsersListFragment"
+        tools:layout="@layout/fragment_users_list">
         <action
             android:id="@+id/action_usersListFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />
@@ -20,9 +20,8 @@
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="com.example.githubsearch.ui.user.detail.UserDetailFragment"
-        tools:layout="@layout/fragment_user_detail"
-        android:label="UserDetailFragment" >
-    </fragment>
+        android:label="UserDetailFragment"
+        tools:layout="@layout/fragment_user_detail"/>
     <fragment
         android:id="@+id/favoriteListFragment"
         android:name="com.example.githubsearch.ui.user.FavoriteListFragment"
@@ -33,6 +32,25 @@
             app:destination="@id/userDetailFragment" />
     </fragment>
 
+    <dialog
+        android:id="@+id/searchUserDialogFragment"
+        android:name="com.example.githubsearch.ui.SearchUserDialogFragment"
+        android:label="SearchUserDialogFragment"
+        tools:layout="@layout/fragment_search_user_dialog">
+        <action
+            android:id="@+id/action_searchUserDialogFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/insertPersonalUsernameFragment"
+        android:name="com.example.githubsearch.ui.personal.InsertPersonalUsernameFragment"
+        android:label="InsertPersonalUsernameFragment"
+        tools:layout="@layout/fragment_insert_personal_username">
+        <action
+            android:id="@+id/action_insertPersonalUsernameFragment_to_personalDetailFragment"
+            app:destination="@id/personalDetailFragment" />
+    </fragment>
+
     <action
         android:id="@+id/go_to_usersListFragment"
         app:destination="@id/usersListFragment" />
@@ -40,15 +58,15 @@
     <action
         android:id="@+id/go_to_favoriteUsersListFragment"
         app:destination="@id/favoriteListFragment" />
-    <dialog
-        android:id="@+id/searchUserDialogFragment"
-        android:name="com.example.githubsearch.ui.SearchUserDialogFragment"
-        tools:layout="@layout/fragment_search_user_dialog"
-        android:label="SearchUserDialogFragment" >
-        <action
-            android:id="@+id/action_searchUserDialogFragment_to_userDetailFragment"
-            app:destination="@id/userDetailFragment" />
-    </dialog>
+
+    <action
+        android:id="@+id/go_to_personalInfo"
+        app:destination="@id/insertPersonalUsernameFragment" />
+    <fragment
+        android:id="@+id/personalDetailFragment"
+        tools:layout="@layout/fragment_user_detail"
+        android:name="com.example.githubsearch.ui.personal.PersonalDetailFragment"
+        android:label="PersonalDetailFragment" />
 
 
 </navigation>

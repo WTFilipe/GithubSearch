@@ -22,4 +22,8 @@
     <string name="feedback_empty_response_generic">Ops, parece que não há informações para serem exibidas aqui</string>
     <string name="feedback_search_empty_field">Insira o nome de usuário</string>
     <string name="feedback_no_user_found">Nenhum usuário com esse username encontrado.</string>
+    <string name="label_me">Eu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_insert_your_username">Insira o seu nome de usuário</string>
 </resources>
