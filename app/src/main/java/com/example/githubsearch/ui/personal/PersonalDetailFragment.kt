@@ -4,10 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import android.system.Os.remove
 import android.view.View
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.githubsearch.R
+import com.example.githubsearch.domain.UserViewModel
 import com.example.githubsearch.getTintedDrawable
 import com.example.githubsearch.hide
 import com.example.githubsearch.show
@@ -15,6 +15,8 @@ import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserUIModel
 import com.example.githubsearch.ui.repository.list.RepositoryListFragment
 import com.example.githubsearch.ui.user.detail.UserDetailFragment
+import retrofit2.HttpException
+import java.net.UnknownHostException
 
 class PersonalDetailFragment : UserDetailFragment() {
 
@@ -73,8 +75,15 @@ class PersonalDetailFragment : UserDetailFragment() {
     }
 
     override fun onError(cause: Throwable?) {
-        Toast.makeText(context, getString(R.string.feedback_no_user_found), Toast.LENGTH_SHORT).show()
-        findNavController().popBackStack()
+        when {
+            cause is HttpException && cause.code() == UserViewModel.RESULT_NOT_FOUND_CODE -> binding.errorLayout.errorText.text = getString(R.string.feedback_no_user_found)
+            cause is UnknownHostException -> binding.errorLayout.errorText.text = getString(R.string.feedback_no_internet_connection)
+            else -> {
+                binding.errorLayout.root.hide()
+                binding.loadingLayout.hide()
+                binding.emptyLayout.root.show()
+            }
+        }
     }
 
     override fun goToRepositoryList() {

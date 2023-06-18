@@ -369,6 +369,15 @@
                 layout="@layout/error_default"
                 android:visibility="gone" />
 
+            <include
+                android:id="@+id/empty_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                layout="@layout/empty_default"
+                android:visibility="gone" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -5,6 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@android:color/system_neutral1_400"
         android:layout_height="match_parent">
 
         <ImageView
@@ -18,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:tint="@android:color/system_accent2_400" />
+            app:tint="@android:color/system_accent2_900" />
 
         <TextView
             android:id="@+id/error_text"
