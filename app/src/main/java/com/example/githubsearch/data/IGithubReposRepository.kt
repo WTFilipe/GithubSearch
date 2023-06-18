@@ -1,8 +1,8 @@
-package com.example.githubsearch.data.remote.github_repos
+package com.example.githubsearch.data
 
 import com.example.githubsearch.ui.models.RepositoryOnListUIModel
 import kotlinx.coroutines.flow.Flow
 
-interface IRepositoryDataSource {
+interface IGithubReposRepository {
     suspend fun getUserRepositoriesList(username: String) : Flow<List<RepositoryOnListUIModel>>
 }

@@ -1,5 +1,7 @@
 package com.example.githubsearch.ui.models
 
+import com.example.githubsearch.data.local.UserLocalModel
+
 data class UserUIModel(
     val avatar_url: String,
     val bio: String,
@@ -20,4 +22,13 @@ data class UserUIModel(
     val type: String,
     val updated_at: String,
     val url: String
-)
+) {
+     fun toLocalModel(): UserLocalModel {
+         return UserLocalModel(
+             uid = id,
+             photoURL = avatar_url,
+             name = name,
+             type = type
+         )
+     }
+}

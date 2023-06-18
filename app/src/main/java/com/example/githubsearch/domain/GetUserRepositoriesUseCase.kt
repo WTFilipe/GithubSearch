@@ -1,6 +1,6 @@
 package com.example.githubsearch.domain
 
-import com.example.githubsearch.data.remote.github_repos.IGithubReposRepository
+import com.example.githubsearch.data.IGithubReposRepository
 import javax.inject.Inject
 
 class GetUserRepositoriesUseCase @Inject constructor(
