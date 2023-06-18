@@ -135,17 +135,17 @@ class UserDetailFragment : BaseFragment() {
         }
 
         binding.loadingLayout.hide()
-        binding.errorLayout.hide()
+        binding.errorLayout.root.hide()
     }
 
     private fun onLoading() {
         binding.loadingLayout.show()
-        binding.errorLayout.hide()
+        binding.errorLayout.root.hide()
     }
 
     private fun onError(){
         binding.loadingLayout.hide()
-        binding.errorLayout.show()
+        binding.errorLayout.root.show()
     }
 
     companion object {

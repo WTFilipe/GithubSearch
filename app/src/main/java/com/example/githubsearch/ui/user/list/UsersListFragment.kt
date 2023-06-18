@@ -20,6 +20,7 @@ import com.example.githubsearch.ui.GridLayoutItemDecoration
 import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserOnListUIModel
 import com.example.githubsearch.ui.user.detail.UserDetailFragment
+import java.net.UnknownHostException
 
 class UsersListFragment : BaseFragment() {
 
@@ -48,7 +49,7 @@ class UsersListFragment : BaseFragment() {
         userViewModel.usersList.observe(viewLifecycleOwner) {
             when (it) {
                 is UIState.Loading -> onLoading()
-                is UIState.Error -> onError()
+                is UIState.Error -> onError(it.cause)
                 is UIState.Success -> onSuccess(it.data)
             }
         }
@@ -56,19 +57,27 @@ class UsersListFragment : BaseFragment() {
 
     private fun onSuccess(data: List<UserOnListUIModel>) {
         userListAdapter.setUserList(data)
-        binding.errorLayout.hide()
+        binding.errorLayout.root.hide()
         binding.loadingLayout.hide()
         binding.usersList.show()
     }
 
     private fun onLoading() {
-        binding.errorLayout.hide()
+        binding.errorLayout.root.hide()
         binding.loadingLayout.show()
         binding.usersList.hide()
     }
 
-    private fun onError() {
-        binding.errorLayout.show()
+    private fun onError(cause: Throwable?) {
+        if (cause is UnknownHostException){
+            binding.errorLayout.errorText.text = getString(R.string.feedback_no_internet_connection)
+        } else {
+            binding.errorLayout.errorText.text = getString(R.string.feedback_generic_error)
+        }
+        binding.errorLayout.root.show()
+        binding.errorLayout.root.setOnClickListener {
+            userViewModel.loadUserList()
+        }
         binding.loadingLayout.hide()
         binding.usersList.hide()
     }
