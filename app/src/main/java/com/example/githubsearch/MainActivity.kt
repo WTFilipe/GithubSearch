@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.githubsearch.databinding.ActivityMainBinding
+import com.example.githubsearch.ui.personal.InsertPersonalUsernameFragment
+import com.example.githubsearch.ui.personal.PersonalDetailFragment
+import com.example.githubsearch.ui.user.FavoriteListFragment
+import com.example.githubsearch.ui.user.list.UsersListFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,6 +46,38 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        val navHostFragment: NavHostFragment? = supportFragmentManager.findFragmentById(binding.navHostFragment.id) as? NavHostFragment
+        val fragment = navHostFragment!!.childFragmentManager.fragments[0]
+
+        val navController = findNavController(binding.navHostFragment.id)
+
+        when(fragment){
+            is PersonalDetailFragment -> {
+                navController.clearBackStack(R.id.personalDetailFragment)
+                navController.navigate(R.id.go_to_usersListFragment)
+                binding.bnvMainActivity.selectedItemId = R.id.item_users
+            }
+            is InsertPersonalUsernameFragment -> {
+                navController.clearBackStack(R.id.insertPersonalUsernameFragment)
+                navController.navigate(R.id.go_to_usersListFragment)
+                binding.bnvMainActivity.selectedItemId = R.id.item_users
+            }
+            is FavoriteListFragment -> {
+                navController.clearBackStack(R.id.favoriteListFragment)
+                navController.navigate(R.id.go_to_usersListFragment)
+                binding.bnvMainActivity.selectedItemId = R.id.item_users
+            }
+            is UsersListFragment -> {
+                this.finish()
+            }
+            else -> {
+                super.onBackPressed()
+            }
+
         }
     }
 }

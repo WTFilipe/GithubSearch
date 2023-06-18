@@ -39,13 +39,14 @@ open class UsersListFragment : BaseFragment() {
             findNavController().navigate(R.id.action_usersListFragment_to_searchUserDialogFragment)
         }
 
+        loadData()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
-        if (savedInstanceState == null) loadData()
     }
 
     open fun setupObservers() {

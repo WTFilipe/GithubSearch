@@ -43,6 +43,13 @@ open class UserDetailFragment : BaseFragment() {
         binding = FragmentUserDetailBinding.inflate(inflater)
 
         setupRepositoryRecyclerView()
+
+        arguments?.getString(USERNAME)?.let {
+            username = it
+            userViewModel.loadUserDetail(username)
+            repositoriesViewModel.loadUserRepositories(username)
+        } ?: onError()
+
         return binding.root
     }
 
@@ -61,12 +68,6 @@ open class UserDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
-
-        arguments?.getString(USERNAME)?.let {
-            username = it
-            userViewModel.loadUserDetail(username)
-            repositoriesViewModel.loadUserRepositories(username)
-        } ?: onError()
     }
 
     open fun setupObservers() {
