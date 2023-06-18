@@ -20,7 +20,6 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="@dimen/spacing_16dp"
-                android:transitionName="userPhoto"
                 android:src="@drawable/ic_launcher_background"
                 app:layout_constraintBottom_toTopOf="@id/tv_name"
                 app:layout_constraintDimensionRatio="1:1"

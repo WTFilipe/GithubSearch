@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.githubsearch.BaseFragment
 import com.example.githubsearch.R
@@ -35,6 +34,10 @@ open class UsersListFragment : BaseFragment() {
         binding = FragmentUsersListBinding.inflate(inflater)
 
         setupUserRecyclerView()
+        binding.fabSearch.show()
+        binding.fabSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_usersListFragment_to_searchUserDialogFragment)
+        }
 
         return binding.root
     }
@@ -87,8 +90,8 @@ open class UsersListFragment : BaseFragment() {
     }
 
     private fun setupUserRecyclerView() {
-        userListAdapter = UserListAdapter { username, photoURL, imageView ->
-            onUserListItemClicked(username, photoURL, imageView)
+        userListAdapter = UserListAdapter { username ->
+            onUserListItemClicked(username)
         }
         val layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         val itemDecoration = GridLayoutItemDecoration(
@@ -104,13 +107,11 @@ open class UsersListFragment : BaseFragment() {
 
     }
 
-    open fun onUserListItemClicked(username: String, photoURL: String, imageView: ImageView) {
+    open fun onUserListItemClicked(username: String) {
         val bundle = bundleOf(
             UserDetailFragment.USERNAME to username,
-            UserDetailFragment.PHOTO_URL to photoURL
         )
-        val extras = FragmentNavigatorExtras(imageView to UserDetailFragment.USER_PHOTO_IMAGE_VIEW)
-        view?.findNavController()?.navigate(R.id.action_usersListFragment_to_userDetailFragment, bundle, null, extras)
+        view?.findNavController()?.navigate(R.id.action_usersListFragment_to_userDetailFragment, bundle)
     }
 
 

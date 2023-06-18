@@ -23,6 +23,8 @@ import com.example.githubsearch.ui.models.RepositoryOnListUIModel
 import com.example.githubsearch.ui.models.UIState
 import com.example.githubsearch.ui.models.UserUIModel
 import com.example.githubsearch.ui.repository.list.RepositoryListAdapter
+import retrofit2.HttpException
+import java.net.UnknownHostException
 
 class UserDetailFragment : BaseFragment() {
 
@@ -67,16 +69,13 @@ class UserDetailFragment : BaseFragment() {
             username = it
             userViewModel.loadUserDetail(username)
             repositoriesViewModel.loadUserRepositories(username)
-        }
-        arguments?.getString(PHOTO_URL)?.let {
-            binding.ivPhoto.loadCircleImage(it)
-        }
+        } ?: onError()
     }
 
     private fun setupObservers() {
         userViewModel.user.observe(viewLifecycleOwner){
             when(it){
-                is UIState.Error -> onError()
+                is UIState.Error -> onError(it.cause)
                 is UIState.Loading -> onLoading()
                 is UIState.Success -> onSuccess(it.data)
             }
@@ -164,6 +163,7 @@ class UserDetailFragment : BaseFragment() {
         binding.tvName.text = data.name
         binding.tvBio.text = data.bio
         binding.tvUsername.text = data.login
+        binding.ivPhoto.loadCircleImage(data.avatar_url, context?.let { ContextCompat.getDrawable(it, R.drawable.ic_personal_user) })
         binding.tvFollowers.text = if (data.followers >= 0) data.followers.toString() else "0"
         binding.tvFollowing.text = if (data.following >= 0) data.followers.toString() else "0"
         binding.tvPublicRepos.text = if (data.public_repos >= 0) data.followers.toString() else "0"
@@ -210,15 +210,19 @@ class UserDetailFragment : BaseFragment() {
         binding.errorLayout.root.hide()
     }
 
-    private fun onError(){
+    private fun onError(cause: Throwable? = null) {
         binding.loadingLayout.hide()
         binding.errorLayout.root.show()
+
+        when {
+            cause is HttpException && cause.code() == UserViewModel.RESULT_NOT_FOUND_CODE -> binding.errorLayout.errorText.text = getString(R.string.feedback_no_user_found)
+            cause is UnknownHostException -> binding.errorLayout.errorText.text = getString(R.string.feedback_no_internet_connection)
+            else -> binding.errorLayout.errorText.text = getString(R.string.feedback_generic_error)
+        }
     }
 
     companion object {
         const val USERNAME = "USERNAME"
-        const val PHOTO_URL = "PHOTO_URL"
         const val REPOSITORY_QUANTITY_IN_LIST = 5
-        const val USER_PHOTO_IMAGE_VIEW = "USER_PHOTO_IMAGE_VIEW"
     }
 }

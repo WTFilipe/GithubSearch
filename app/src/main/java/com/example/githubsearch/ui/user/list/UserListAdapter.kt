@@ -2,12 +2,11 @@ package com.example.githubsearch.ui.user.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubsearch.databinding.UserListItemBinding
 import com.example.githubsearch.ui.models.UserOnListUIModel
 
-class UserListAdapter(private val onItemClicked: (String, String, ImageView) -> Unit): RecyclerView.Adapter<UserListViewHolder>() {
+class UserListAdapter(private val onItemClicked: (String) -> Unit): RecyclerView.Adapter<UserListViewHolder>() {
 
     private val userList = mutableListOf<UserOnListUIModel>()
 

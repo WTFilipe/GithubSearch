@@ -1,9 +1,7 @@
 package com.example.githubsearch.ui.user
 
-import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.example.githubsearch.R
 import com.example.githubsearch.hide
 import com.example.githubsearch.show
@@ -28,13 +26,11 @@ class FavoriteListFragment() : UsersListFragment() {
         userViewModel.loadFavoriteUserList()
     }
 
-    override fun onUserListItemClicked(username: String, photoURL: String, imageView: ImageView) {
+    override fun onUserListItemClicked(username: String) {
         val bundle = bundleOf(
             UserDetailFragment.USERNAME to username,
-            UserDetailFragment.PHOTO_URL to photoURL
         )
-        val extras = FragmentNavigatorExtras(imageView to UserDetailFragment.USER_PHOTO_IMAGE_VIEW)
-        view?.findNavController()?.navigate(R.id.action_favoriteListFragment_to_userDetailFragment, bundle, null, extras)
+        view?.findNavController()?.navigate(R.id.action_favoriteListFragment_to_userDetailFragment, bundle)
     }
 
     override fun onSuccess(data: List<UserOnListUIModel>) {

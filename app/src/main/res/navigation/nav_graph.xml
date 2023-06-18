@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_usersListFragment_to_userDetailFragment"
             app:destination="@id/userDetailFragment" />
+        <action
+            android:id="@+id/action_usersListFragment_to_searchUserDialogFragment"
+            app:destination="@id/searchUserDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/userDetailFragment"
@@ -37,7 +40,15 @@
     <action
         android:id="@+id/go_to_favoriteUsersListFragment"
         app:destination="@id/favoriteListFragment" />
-
+    <dialog
+        android:id="@+id/searchUserDialogFragment"
+        android:name="com.example.githubsearch.ui.SearchUserDialogFragment"
+        tools:layout="@layout/fragment_search_user_dialog"
+        android:label="SearchUserDialogFragment" >
+        <action
+            android:id="@+id/action_searchUserDialogFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </dialog>
 
 
 </navigation>

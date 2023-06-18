@@ -124,4 +124,8 @@ class UserViewModel @Inject constructor(
                 }
         }
     }
+
+    companion object {
+        const val RESULT_NOT_FOUND_CODE = 404
+    }
 }

@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -10,27 +11,27 @@
             android:id="@+id/error_icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ic_wifi_off"
+            android:src="@drawable/ic_sad"
             app:layout_constraintBottom_toTopOf="@id/error_text"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:tint="@color/black" />
+            app:tint="@android:color/system_accent2_400" />
 
         <TextView
             android:id="@+id/error_text"
             style="@style/TextAppearance.Material3.BodyLarge"
-            android:layout_marginHorizontal="@dimen/spacing_16dp"
             android:layout_width="@dimen/spacing_0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_16dp"
             android:gravity="center"
+            android:text="@string/feedback_empty_response_generic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/error_icon"
-            tools:text="Ocorreu um erro" />
+            app:layout_constraintTop_toBottomOf="@id/error_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
