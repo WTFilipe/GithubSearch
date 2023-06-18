@@ -16,7 +16,7 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(
     private val getUserListUseCase: GetUserListUseCase,
     private val getUserDetailUseCase: GetUserDetailUseCase,
-    private val getFavoriteUsersListUseCase: IGetUserListUseCase,
+    private val getFavoriteUsersListUseCase: IGetFavoriteUsersListUseCase,
     private val getAddFavoriteUserUseCase: IAddFavoriteUserUseCase,
     private val getDeleteFavoriteUserUseCase: IRemoveFavoriteUserUseCase,
 ): ViewModel() {

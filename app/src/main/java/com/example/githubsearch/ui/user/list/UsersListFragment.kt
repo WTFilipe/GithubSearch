@@ -22,11 +22,11 @@ import com.example.githubsearch.ui.models.UserOnListUIModel
 import com.example.githubsearch.ui.user.detail.UserDetailFragment
 import java.net.UnknownHostException
 
-class UsersListFragment : BaseFragment() {
+open class UsersListFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentUsersListBinding
-    private lateinit var userListAdapter: UserListAdapter
-    private val userViewModel: UserViewModel by viewModels()
+    protected lateinit var binding: FragmentUsersListBinding
+    protected val userViewModel: UserViewModel by viewModels()
+    protected lateinit var userListAdapter: UserListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,10 +42,10 @@ class UsersListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
-        if (savedInstanceState == null) userViewModel.loadUserList()
+        if (savedInstanceState == null) loadData()
     }
 
-    private fun setupObservers() {
+    open fun setupObservers() {
         userViewModel.usersList.observe(viewLifecycleOwner) {
             when (it) {
                 is UIState.Loading -> onLoading()
@@ -55,20 +55,20 @@ class UsersListFragment : BaseFragment() {
         }
     }
 
-    private fun onSuccess(data: List<UserOnListUIModel>) {
+    open fun onSuccess(data: List<UserOnListUIModel>) {
         userListAdapter.setUserList(data)
         binding.errorLayout.root.hide()
         binding.loadingLayout.hide()
         binding.usersList.show()
     }
 
-    private fun onLoading() {
+    protected fun onLoading() {
         binding.errorLayout.root.hide()
         binding.loadingLayout.show()
         binding.usersList.hide()
     }
 
-    private fun onError(cause: Throwable?) {
+    open fun onError(cause: Throwable?) {
         if (cause is UnknownHostException){
             binding.errorLayout.errorText.text = getString(R.string.feedback_no_internet_connection)
         } else {
@@ -76,13 +76,17 @@ class UsersListFragment : BaseFragment() {
         }
         binding.errorLayout.root.show()
         binding.errorLayout.root.setOnClickListener {
-            userViewModel.loadUserList()
+            loadData()
         }
         binding.loadingLayout.hide()
         binding.usersList.hide()
     }
 
-    private fun setupUserRecyclerView() {
+    open fun loadData() {
+        userViewModel.loadUserList()
+    }
+
+    protected fun setupUserRecyclerView() {
         userListAdapter = UserListAdapter { username, photoURL, imageView ->
             onUserListItemClicked(username, photoURL, imageView)
         }
@@ -100,7 +104,7 @@ class UsersListFragment : BaseFragment() {
 
     }
 
-    private fun onUserListItemClicked(username: String, photoURL: String, imageView: ImageView) {
+    open fun onUserListItemClicked(username: String, photoURL: String, imageView: ImageView) {
         val bundle = bundleOf(
             UserDetailFragment.USERNAME to username,
             UserDetailFragment.PHOTO_URL to photoURL

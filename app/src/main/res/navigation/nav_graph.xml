@@ -20,5 +20,24 @@
         tools:layout="@layout/fragment_user_detail"
         android:label="UserDetailFragment" >
     </fragment>
+    <fragment
+        android:id="@+id/favoriteListFragment"
+        android:name="com.example.githubsearch.ui.user.FavoriteListFragment"
+        android:label="FavoriteListFragment"
+        tools:layout="@layout/fragment_users_list">
+        <action
+            android:id="@+id/action_favoriteListFragment_to_userDetailFragment"
+            app:destination="@id/userDetailFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/go_to_usersListFragment"
+        app:destination="@id/usersListFragment" />
+
+    <action
+        android:id="@+id/go_to_favoriteUsersListFragment"
+        app:destination="@id/favoriteListFragment" />
+
+
 
 </navigation>

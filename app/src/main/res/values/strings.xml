@@ -4,6 +4,7 @@
     <string name="placeholder_no_description">Nenhuma descrição encontrada</string>
     <string name="placeholder_not_found">Não encontrado</string>
     <string name="label_users">Usuários</string>
+    <string name="label_favorites">Favoritos</string>
     <string name="label_public_repos">Repositórios públicos</string>
     <string name="label_following">Seguindo</string>
     <string name="label_followers">Seguidores</string>

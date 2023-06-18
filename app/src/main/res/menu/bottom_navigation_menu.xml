@@ -5,4 +5,9 @@
         android:id="@+id/item_users"
         android:title="@string/label_users"
         android:icon="@drawable/ic_users"/>
+
+    <item
+        android:id="@+id/item_favorite"
+        android:title="@string/label_favorites"
+        android:icon="@drawable/ic_favorite"/>
 </menu>
