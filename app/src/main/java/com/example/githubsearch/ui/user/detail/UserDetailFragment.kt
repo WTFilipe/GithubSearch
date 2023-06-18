@@ -107,7 +107,7 @@ class UserDetailFragment : BaseFragment() {
         binding.tvUsername.text = data.login
         binding.tvFollowers.text = if (data.followers >= 0) data.followers.toString() else "0"
         binding.tvFollowing.text = if (data.following >= 0) data.followers.toString() else "0"
-        binding.tvLabelPublicRepos.text = if (data.public_repos >= 0) data.followers.toString() else "0"
+        binding.tvPublicRepos.text = if (data.public_repos >= 0) data.followers.toString() else "0"
         binding.tvCompany.text = data.company.ifBlank { getString(R.string.placeholder_not_found) }
         binding.tvLocation.text = data.location.ifBlank { getString(R.string.placeholder_not_found) }
         binding.tvBlog.text = data.blog.ifBlank { getString(R.string.placeholder_not_found) }
