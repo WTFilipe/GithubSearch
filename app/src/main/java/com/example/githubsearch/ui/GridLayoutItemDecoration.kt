@@ -23,7 +23,7 @@ class GridLayoutItemDecoration(
             outRect.top = if (position < spanCount) spaceTop.dp else (spaceTop / 2).dp
 
             val quantityOfItemsAtLastRow = position % spanCount
-            outRect.bottom = if (position >= itemCount - quantityOfItemsAtLastRow) spaceBottom.dp else (spaceBottom / 2).dp
+            outRect.bottom = if (position > itemCount - quantityOfItemsAtLastRow) spaceBottom.dp else (spaceBottom / 2).dp
 
             outRect.left = if (position % spanCount == 0) spaceStart.dp else (spaceStart / 2).dp
 
