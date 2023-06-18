@@ -1,7 +1,6 @@
 package com.example.githubsearch.ui.user
 
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -35,7 +34,7 @@ class FavoriteListFragment() : UsersListFragment() {
             UserDetailFragment.PHOTO_URL to photoURL
         )
         val extras = FragmentNavigatorExtras(imageView to UserDetailFragment.USER_PHOTO_IMAGE_VIEW)
-        view?.findNavController()?.navigate(R.id.action_usersListFragment_to_userDetailFragment, bundle, null, extras)
+        view?.findNavController()?.navigate(R.id.action_favoriteListFragment_to_userDetailFragment, bundle, null, extras)
     }
 
     override fun onSuccess(data: List<UserOnListUIModel>) {
@@ -43,9 +42,33 @@ class FavoriteListFragment() : UsersListFragment() {
             binding.emptyLayout.errorText.text = getString(R.string.feedback_empty_response_favorite)
             binding.emptyLayout.root.show()
             binding.usersList.hide()
-        }
+            binding.loadingLayout.hide()
+            binding.errorLayout.root.hide()
 
-        binding.errorLayout.root.hide()
-        binding.loadingLayout.hide()
+        } else {
+            userListAdapter.setUserList(data)
+            binding.errorLayout.root.hide()
+            binding.emptyLayout.root.hide()
+            binding.loadingLayout.hide()
+            binding.usersList.show()
+        }
     }
+
+    override fun onLoading() {
+        binding.errorLayout.root.hide()
+        binding.emptyLayout.root.hide()
+        binding.loadingLayout.show()
+        binding.usersList.hide()
+    }
+
+    override fun onError(cause: Throwable?) {
+        binding.errorLayout.errorText.text = getString(R.string.feedback_generic_error)
+
+        binding.errorLayout.root.show()
+        binding.emptyLayout.root.hide()
+        binding.loadingLayout.hide()
+        binding.usersList.hide()
+    }
+
+
 }

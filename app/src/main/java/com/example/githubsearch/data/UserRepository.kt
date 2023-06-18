@@ -21,4 +21,5 @@ class UserRepository @Inject constructor(
     override suspend fun addFavoriteUser(user: UserUIModel) = localDataSource.addFavoriteUser(user).flowOn(Dispatchers.IO)
 
     override suspend fun removeFavoriteUser(user: UserUIModel) = localDataSource.removeFavoriteUser(user).flowOn(Dispatchers.IO)
+    override suspend fun isUserFavorited(id: Int): Flow<Boolean> = localDataSource.isUserFavorited(id).flowOn(Dispatchers.IO)
 }

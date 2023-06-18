@@ -62,7 +62,7 @@ open class UsersListFragment : BaseFragment() {
         binding.usersList.show()
     }
 
-    protected fun onLoading() {
+    open fun onLoading() {
         binding.errorLayout.root.hide()
         binding.loadingLayout.show()
         binding.usersList.hide()
@@ -86,7 +86,7 @@ open class UsersListFragment : BaseFragment() {
         userViewModel.loadUserList()
     }
 
-    protected fun setupUserRecyclerView() {
+    private fun setupUserRecyclerView() {
         userListAdapter = UserListAdapter { username, photoURL, imageView ->
             onUserListItemClicked(username, photoURL, imageView)
         }

@@ -11,4 +11,5 @@ interface IUserRepository {
     suspend fun getFavoriteUsers(): Flow<List<UserOnListUIModel>>
     suspend fun addFavoriteUser(user: UserUIModel) : Flow<Long>
     suspend fun removeFavoriteUser(user: UserUIModel) : Flow<Int>
+    suspend fun isUserFavorited(id: Int) : Flow<Boolean>
 }

@@ -27,5 +27,10 @@ class UserLocalDataSource @Inject constructor(
         emit(result)
     }
 
+    override suspend fun isUserFavorited(id: Int): Flow<Boolean> = flow {
+        val result = userLocalDAO.getUserById(id)
+        emit(result != null)
+    }
+
 
 }

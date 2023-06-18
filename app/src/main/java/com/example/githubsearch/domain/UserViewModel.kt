@@ -19,6 +19,7 @@ class UserViewModel @Inject constructor(
     private val getFavoriteUsersListUseCase: IGetFavoriteUsersListUseCase,
     private val getAddFavoriteUserUseCase: IAddFavoriteUserUseCase,
     private val getDeleteFavoriteUserUseCase: IRemoveFavoriteUserUseCase,
+    private val getIsUserFavoritedUseCase: IsUserFavoritedUseCase,
 ): ViewModel() {
 
     private val _usersList = MutableLiveData<UIState<List<UserOnListUIModel>>>()
@@ -40,6 +41,10 @@ class UserViewModel @Inject constructor(
     private val _removeFavoriteSuccess = MutableLiveData<UIState<Unit>>()
     val removeFavoriteSuccess: LiveData<UIState<Unit>>
         get() = _removeFavoriteSuccess
+
+    private val _isUserFavorited = MutableLiveData<UIState<Boolean>>()
+    val isUserFavorited: LiveData<UIState<Boolean>>
+        get() = _isUserFavorited
 
     fun loadUserDetail(userName: String){
         viewModelScope.launch {
@@ -103,6 +108,19 @@ class UserViewModel @Inject constructor(
                 }
                 .collect{
                     _removeFavoriteSuccess.value = UIState.Success(Unit)
+                }
+        }
+    }
+
+    fun loadIsUserFavorited(id: Int){
+        viewModelScope.launch {
+            _isUserFavorited.value = UIState.Loading
+            getIsUserFavoritedUseCase.execute(id)
+                .catch {
+                    _isUserFavorited.value = UIState.Error()
+                }
+                .collect {
+                    _isUserFavorited.value = UIState.Success(it)
                 }
         }
     }

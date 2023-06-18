@@ -5,6 +5,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:fillViewport="true"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +18,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/spacing_16dp"
-                android:layout_marginTop="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_20dp"
                 android:src="@drawable/ic_launcher_background"
                 android:transitionName="userPhoto"
                 app:layout_constraintDimensionRatio="1:1"
@@ -25,33 +26,66 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.4" />
+                app:layout_constraintWidth_percent="0.3" />
 
             <TextView
                 android:id="@+id/tv_name"
-                style="@style/TextAppearance.Material3.DisplaySmall"
+                style="@style/TextAppearance.Material3.TitleLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_16dp"
+                android:layout_marginStart="@dimen/spacing_16dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/barrier_fav_icon"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/iv_photo"
                 app:layout_constraintTop_toTopOf="@id/iv_photo"
                 tools:text="Filipe Oliveira" />
+
+            <ImageView
+                android:id="@+id/iv_favorite_icon"
+                android:layout_width="@dimen/icon_size_24_dp"
+                android:layout_height="@dimen/spacing_0dp"
+                android:layout_marginStart="@dimen/spacing_8dp"
+                android:layout_marginEnd="@dimen/spacing_16dp"
+                tools:src="@drawable/ic_favorite"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_name"
+                app:layout_constraintTop_toTopOf="@id/tv_name" />
+
+            <ProgressBar
+                android:id="@+id/pb_favorite"
+                android:layout_width="@dimen/icon_size_24_dp"
+                android:layout_height="@dimen/spacing_0dp"
+                android:layout_marginStart="@dimen/spacing_8dp"
+                android:layout_marginEnd="@dimen/spacing_16dp"
+                app:layout_constraintDimensionRatio="1:1"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_favorite_icon"
+                app:layout_constraintEnd_toEndOf="@id/iv_favorite_icon"
+                app:layout_constraintStart_toStartOf="@id/iv_favorite_icon"
+                app:layout_constraintTop_toTopOf="@id/iv_favorite_icon" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_fav_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:barrierDirection="start"
+                app:constraint_referenced_ids="pb_favorite, iv_favorite_icon"/>
 
             <TextView
                 android:id="@+id/tv_username"
                 style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_16dp"
+                android:layout_marginStart="@dimen/spacing_16dp"
                 android:layout_marginVertical="@dimen/spacing_16dp"
                 android:ellipsize="end"
                 android:maxLines="2"
                 app:layout_constraintBottom_toBottomOf="@id/iv_photo"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_name"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@id/iv_photo"
                 app:layout_constraintTop_toBottomOf="@id/tv_name"
@@ -66,6 +100,8 @@
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
                 android:layout_marginTop="@dimen/spacing_16dp"
                 android:text="@string/label_followers"
+                app:layout_constraintEnd_toStartOf="@id/tv_label_following"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
 
@@ -90,6 +126,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
                 android:layout_marginTop="@dimen/spacing_16dp"
                 android:text="@string/label_following"
+                app:layout_constraintEnd_toStartOf="@id/tv_label_public_repos"
                 app:layout_constraintStart_toEndOf="@id/tv_label_followers"
                 app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
 
@@ -114,6 +151,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_16dp"
                 android:layout_marginTop="@dimen/spacing_16dp"
                 android:text="@string/label_public_repos"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_label_following"
                 app:layout_constraintTop_toBottomOf="@+id/iv_photo" />
 
@@ -146,7 +184,7 @@
 
             <TextView
                 android:id="@+id/tv_label_location"
-                style="@style/TextAppearance.Material3.BodyLarge"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16dp"
@@ -157,134 +195,134 @@
 
             <TextView
                 android:id="@+id/tv_location"
-                style="@style/TextAppearance.Material3.BodyMedium"
+                style="@style/TextAppearance.Material3.BodySmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_8dp"
                 android:layout_marginEnd="@dimen/spacing_16dp"
-                android:gravity="start"
                 android:ellipsize="end"
+                android:gravity="start"
                 android:lines="1"
                 android:text="@string/label_company"
-                app:layout_constraintVertical_bias="1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_label_location"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_label_location"
                 app:layout_constraintTop_toTopOf="@+id/tv_label_location"
+                app:layout_constraintVertical_bias="1"
                 tools:text="Rio de Janeiro" />
 
             <TextView
                 android:id="@+id/tv_label_company"
-                style="@style/TextAppearance.Material3.BodyLarge"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16dp"
-                android:layout_marginTop="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_8dp"
                 android:text="@string/label_company"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_label_location" />
 
             <TextView
                 android:id="@+id/tv_company"
-                style="@style/TextAppearance.Material3.BodyMedium"
+                style="@style/TextAppearance.Material3.BodySmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_8dp"
                 android:layout_marginEnd="@dimen/spacing_16dp"
-                android:gravity="start"
                 android:ellipsize="end"
+                android:gravity="start"
                 android:lines="1"
                 android:text="@string/label_company"
-                app:layout_constraintVertical_bias="1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_label_company"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_label_company"
                 app:layout_constraintTop_toTopOf="@+id/tv_label_company"
+                app:layout_constraintVertical_bias="1"
                 tools:text="Verity" />
 
             <TextView
                 android:id="@+id/tv_label_blog"
-                style="@style/TextAppearance.Material3.BodyLarge"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16dp"
-                android:layout_marginTop="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_8dp"
                 android:text="@string/label_blog"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_label_company" />
 
             <TextView
                 android:id="@+id/tv_blog"
-                style="@style/TextAppearance.Material3.BodyMedium"
+                style="@style/TextAppearance.Material3.BodySmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_8dp"
                 android:layout_marginEnd="@dimen/spacing_16dp"
-                android:gravity="start"
                 android:ellipsize="end"
+                android:gravity="start"
                 android:lines="1"
                 android:text="@string/label_company"
-                app:layout_constraintVertical_bias="1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_label_blog"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_label_blog"
                 app:layout_constraintTop_toTopOf="@+id/tv_label_blog"
+                app:layout_constraintVertical_bias="1"
                 tools:text="URL do Blog" />
 
             <TextView
                 android:id="@+id/tv_label_twitter"
-                style="@style/TextAppearance.Material3.BodyLarge"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16dp"
-                android:layout_marginTop="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_8dp"
                 android:text="@string/label_twitter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_label_blog" />
 
             <TextView
                 android:id="@+id/tv_twitter"
-                style="@style/TextAppearance.Material3.BodyMedium"
+                style="@style/TextAppearance.Material3.BodySmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_8dp"
                 android:layout_marginEnd="@dimen/spacing_16dp"
-                android:gravity="start"
                 android:ellipsize="end"
+                android:gravity="start"
                 android:lines="1"
-                app:layout_constraintVertical_bias="1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_label_twitter"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_label_twitter"
                 app:layout_constraintTop_toTopOf="@+id/tv_label_twitter"
+                app:layout_constraintVertical_bias="1"
                 tools:text="Username" />
 
             <TextView
                 android:id="@+id/tv_label_email"
-                style="@style/TextAppearance.Material3.BodyLarge"
+                style="@style/TextAppearance.Material3.BodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_16dp"
-                android:layout_marginTop="@dimen/spacing_16dp"
+                android:layout_marginTop="@dimen/spacing_8dp"
                 android:text="@string/label_email"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_label_twitter" />
 
             <TextView
                 android:id="@+id/tv_email"
-                style="@style/TextAppearance.Material3.BodyMedium"
+                style="@style/TextAppearance.Material3.BodySmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_8dp"
                 android:layout_marginEnd="@dimen/spacing_16dp"
-                android:gravity="start"
                 android:ellipsize="end"
+                android:gravity="start"
                 android:lines="1"
-                app:layout_constraintVertical_bias="1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_label_email"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_label_email"
                 app:layout_constraintTop_toTopOf="@+id/tv_label_email"
+                app:layout_constraintVertical_bias="1"
                 tools:text="email@email.com" />
 
 
@@ -292,18 +330,25 @@
                 android:id="@+id/rv_user_repositories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_8dp"
+                android:layout_marginTop="@dimen/spacing_16dp"
                 android:layout_marginBottom="@dimen/spacing_16dp"
+                app:layout_constraintVertical_bias="0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_label_email" />
 
             <include
                 android:id="@+id/loading_layout"
                 layout="@layout/loading_default"
-                android:visibility="gone" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
 
             <include
                 android:id="@+id/error_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 layout="@layout/error_default"
                 android:visibility="gone" />
 

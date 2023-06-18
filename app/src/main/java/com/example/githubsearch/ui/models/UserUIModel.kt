@@ -27,7 +27,7 @@ data class UserUIModel(
          return UserLocalModel(
              uid = id,
              photoURL = avatar_url,
-             name = name,
+             name = login,
              type = type
          )
      }

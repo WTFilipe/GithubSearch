@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
@@ -30,6 +31,7 @@ class UserDetailFragment : BaseFragment() {
     private lateinit var repositoryAdapter: RepositoryListAdapter
     private val userViewModel: UserViewModel by viewModels()
     private val repositoriesViewModel: RepositoryViewModel by viewModels()
+    private var isUserFavorited = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +44,6 @@ class UserDetailFragment : BaseFragment() {
         binding = FragmentUserDetailBinding.inflate(inflater)
 
         setupRepositoryRecyclerView()
-
         return binding.root
     }
 
@@ -88,8 +89,64 @@ class UserDetailFragment : BaseFragment() {
                 is UIState.Success -> onReposSuccess(it.data)
             }
         }
-    }
 
+        userViewModel.isUserFavorited.observe(viewLifecycleOwner){
+            when(it){
+                is UIState.Loading -> {}
+                is UIState.Error -> {
+                    isUserFavorited = false
+                    binding.ivFavoriteIcon.setImageDrawable(context?.let { it1 -> ContextCompat.getDrawable(it1, R.drawable.ic_favorite_off) })
+                }
+                is UIState.Success -> {
+                    if (!it.data){
+                        isUserFavorited = false
+                        binding.ivFavoriteIcon.setImageDrawable(context?.let { it1 -> ContextCompat.getDrawable(it1, R.drawable.ic_favorite_off) })
+                    } else {
+                        isUserFavorited = true
+                        binding.ivFavoriteIcon.setImageDrawable(context?.let { it1 -> ContextCompat.getDrawable(it1, R.drawable.ic_favorite) })
+                    }
+                }
+            }
+        }
+
+        userViewModel.addFavoriteSuccess.observe(viewLifecycleOwner){
+            when(it){
+                is UIState.Loading -> {
+                    binding.ivFavoriteIcon.hide()
+                    binding.pbFavorite.show()
+                }
+                is UIState.Error -> {
+                    binding.ivFavoriteIcon.setImageDrawable(context?.let { it1 -> ContextCompat.getDrawable(it1, R.drawable.ic_favorite_off) })
+                    binding.ivFavoriteIcon.show()
+                    binding.pbFavorite.hide()
+                }
+                is UIState.Success ->{
+                    binding.ivFavoriteIcon.setImageDrawable(context?.let { it1 -> ContextCompat.getDrawable(it1, R.drawable.ic_favorite) })
+                    binding.ivFavoriteIcon.show()
+                    binding.pbFavorite.hide()
+                }
+            }
+        }
+
+        userViewModel.removeFavoriteSuccess.observe(viewLifecycleOwner){
+            when(it){
+                is UIState.Loading -> {
+                    binding.ivFavoriteIcon.hide()
+                    binding.pbFavorite.show()
+                }
+                is UIState.Error -> {
+                    binding.ivFavoriteIcon.setImageDrawable(context?.let { it1 -> ContextCompat.getDrawable(it1, R.drawable.ic_favorite) })
+                    binding.ivFavoriteIcon.show()
+                    binding.pbFavorite.hide()
+                }
+                is UIState.Success ->{
+                    binding.ivFavoriteIcon.setImageDrawable(context?.let { it1 -> ContextCompat.getDrawable(it1, R.drawable.ic_favorite_off) })
+                    binding.ivFavoriteIcon.show()
+                    binding.pbFavorite.hide()
+                }
+            }
+        }
+    }
     private fun onReposSuccess(data: List<RepositoryOnListUIModel>) {
         repositoryAdapter.setRepositoryList(data)
     }
@@ -102,6 +159,8 @@ class UserDetailFragment : BaseFragment() {
     }
 
     private fun onSuccess(data: UserUIModel) {
+        userViewModel.loadIsUserFavorited(data.id)
+
         binding.tvName.text = data.name
         binding.tvBio.text = data.bio
         binding.tvUsername.text = data.login
@@ -136,6 +195,14 @@ class UserDetailFragment : BaseFragment() {
 
         binding.loadingLayout.hide()
         binding.errorLayout.root.hide()
+
+        binding.ivFavoriteIcon.setOnClickListener {
+            if (isUserFavorited){
+                userViewModel.deleteFavoriteUser(data)
+            } else {
+                userViewModel.addFavoriteUser(data)
+            }
+        }
     }
 
     private fun onLoading() {
