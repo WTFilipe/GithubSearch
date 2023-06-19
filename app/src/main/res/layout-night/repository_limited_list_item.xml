@@ -55,7 +55,7 @@
                 android:layout_marginBottom="@dimen/spacing_16dp"
                 android:gravity="center"
                 app:drawableStartCompat="@drawable/ic_star"
-                app:drawableTint="@color/black"
+                app:drawableTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_repo_desc"
