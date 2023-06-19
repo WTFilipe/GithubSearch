@@ -1,14 +1,10 @@
 package com.example.githubsearch.ui.personal
 
 import android.content.Context
-import android.os.Bundle
-import android.system.Os.remove
-import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.githubsearch.R
 import com.example.githubsearch.domain.UserViewModel
-import com.example.githubsearch.getTintedDrawable
 import com.example.githubsearch.hide
 import com.example.githubsearch.show
 import com.example.githubsearch.ui.models.UIState
@@ -20,31 +16,6 @@ import java.net.UnknownHostException
 
 class PersonalDetailFragment : UserDetailFragment() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setupExitIcon()
-        setupListeners()
-    }
-
-    private fun setupExitIcon() {
-        binding.ivFavoriteIcon.hide()
-        binding.pbFavorite.hide()
-        context?.let {
-            binding.ivFavoriteIcon.setImageDrawable(it.getTintedDrawable(R.drawable.ic_exit))
-            binding.ivFavoriteIcon.show()
-        }
-    }
-
-    private fun setupListeners() {
-        binding.ivFavoriteIcon.setOnClickListener {
-            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-            with (sharedPref?.edit()) {
-                remove(SAVED_USER)
-                this?.apply()
-                findNavController().popBackStack()
-            }
-        }
-    }
 
     override fun setupObservers() {
         userViewModel.user.observe(viewLifecycleOwner){

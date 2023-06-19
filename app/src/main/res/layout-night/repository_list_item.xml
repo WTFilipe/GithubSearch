@@ -69,12 +69,13 @@
                 android:layout_marginTop="@dimen/spacing_8dp"
                 android:layout_marginBottom="@dimen/spacing_16dp"
                 app:drawableStartCompat="@drawable/ic_watcher"
+                android:drawablePadding="@dimen/spacing_2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_stars"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
-                android:drawableTint="@color/white"
-                app:layout_constraintTop_toBottomOf="@id/tv_repo_desc" />
+                app:layout_constraintTop_toBottomOf="@id/tv_repo_desc"
+                app:drawableTint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

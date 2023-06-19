@@ -35,7 +35,6 @@
                 android:id="@+id/tiet_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/ic_search"
                 android:hint="@string/label_username"
                 android:imeOptions="actionSearch"
                 android:inputType="text" />

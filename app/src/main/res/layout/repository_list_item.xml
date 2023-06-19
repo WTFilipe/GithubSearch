@@ -69,6 +69,7 @@
                 android:layout_marginTop="@dimen/spacing_8dp"
                 android:layout_marginBottom="@dimen/spacing_16dp"
                 app:drawableStartCompat="@drawable/ic_watcher"
+                android:drawablePadding="@dimen/spacing_2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tv_stars"
                 app:layout_constraintEnd_toEndOf="parent"
