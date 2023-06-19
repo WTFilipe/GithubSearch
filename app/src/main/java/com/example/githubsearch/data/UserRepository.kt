@@ -18,8 +18,7 @@ class UserRepository @Inject constructor(
     override suspend fun getUserDetail(userName: String): Flow<UserUIModel> = remoteDataSource.getUserDetail(userName).flowOn(Dispatchers.IO)
     override suspend fun getFavoriteUsers(): Flow<List<UserOnListUIModel>> = localDataSource.getFavoritesUsersList().flowOn(Dispatchers.IO)
 
-    override suspend fun addFavoriteUser(user: UserUIModel) = localDataSource.addFavoriteUser(user).flowOn(Dispatchers.IO)
-
-    override suspend fun removeFavoriteUser(user: UserUIModel) = localDataSource.removeFavoriteUser(user).flowOn(Dispatchers.IO)
+    override suspend fun addFavoriteUser(user: UserUIModel) : Flow<Long> = localDataSource.addFavoriteUser(user).flowOn(Dispatchers.IO)
+    override suspend fun removeFavoriteUser(user: UserUIModel) : Flow<Int> = localDataSource.removeFavoriteUser(user).flowOn(Dispatchers.IO)
     override suspend fun isUserFavorited(id: Int): Flow<Boolean> = localDataSource.isUserFavorited(id).flowOn(Dispatchers.IO)
 }
