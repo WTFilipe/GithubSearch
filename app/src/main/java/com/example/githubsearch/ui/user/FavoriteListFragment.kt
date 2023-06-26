@@ -1,5 +1,7 @@
 package com.example.githubsearch.ui.user
 
+import android.os.Bundle
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.example.githubsearch.R
@@ -12,6 +14,7 @@ import com.example.githubsearch.ui.user.list.UsersListFragment
 
 class FavoriteListFragment() : UsersListFragment() {
 
+
     override fun setupObservers() {
         userViewModel.favoriteUsersList.observe(viewLifecycleOwner) {
             when (it) {
@@ -20,6 +23,11 @@ class FavoriteListFragment() : UsersListFragment() {
                 is UIState.Success -> onSuccess(it.data)
             }
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.fabSearch.hide()
     }
 
     override fun loadData() {

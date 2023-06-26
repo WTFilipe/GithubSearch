@@ -34,7 +34,6 @@ open class UsersListFragment : BaseFragment() {
         binding = FragmentUsersListBinding.inflate(inflater)
 
         setupUserRecyclerView()
-        binding.fabSearch.show()
         binding.fabSearch.setOnClickListener {
             findNavController().navigate(R.id.action_usersListFragment_to_searchUserDialogFragment)
         }
@@ -46,6 +45,7 @@ open class UsersListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fabSearch.show()
         setupObservers()
     }
 
